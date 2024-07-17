@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Testing Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="background-animation"></div>
+    <div class="container">
+        <h1>UI/UX Testing Tool</h1>
+        <form action="/generate" method="post">
+            <label for="url">Website URL:</label>
+            <input type="text" id="url" name="url" placeholder="e.g., https://example.com" required>
+            
+            <label for="num_tests">Number of Test Cases:</label>
+            <input type="number" id="num_tests" name="num_tests" min="1" required>
+            
+            <button type="submit" class="btn">Generate Test Cases</button>
+        </form>
+        
+        {% if input_file %}
+        <h2>Input File Generated</h2>
+        <a href="{{ url_for('download', filename='ui_ux_test_cases.xlsx') }}" class="btn">Download Input Excel File</a>
+        
+        <h2>Upload Your Test Cases File for Testing</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="url" value="{{ url }}">
+            <input type="file" name="file" accept=".xlsx" required>
+            <button type="submit" class="btn">Run Tests</button>
+        </form>
+        {% endif %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/dist/vanta.net.min.js"></script>
+    <script>
+        VANTA.NET({
+            el: "#background-animation",
+            color: 0x1a1a1a,
+            backgroundColor: 0xffffff,
+            points: 10.00,
+            maxDistance: 20.00,
+            spacing: 20.00
+        });
+    </script>
+</body>
+</html>

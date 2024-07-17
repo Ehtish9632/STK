@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="background-animation"></div>
+    <div class="container">
+        <h1>Test Results</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Test Case ID</th>
+                    <th>Description</th>
+                    <th>Element Selector</th>
+                    <th>Action</th>
+                    <th>Input Data</th>
+                    <th>Expected Result</th>
+                    <th>Actual Result</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result['Test Case ID'] }}</td>
+                    <td>{{ result['Description'] }}</td>
+                    <td>{{ result['Element Selector'] }}</td>
+                    <td>{{ result['Action'] }}</td>
+                    <td>{{ result['Input Data'] }}</td>
+                    <td>{{ result['Expected Result'] }}</td>
+                    <td>{{ result['Actual Result'] }}</td>
+                    <td>{{ result['Status'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Download Results</h2>
+        <a href="{{ url_for('download', filename='ui_ux_test_results.xlsx') }}" class="btn">Download Test Results Excel File</a>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/dist/vanta.net.min.js"></script>
+    <script>
+        VANTA.NET({
+            el: "#background-animation",
+            color: 0x1a1a1a,
+            backgroundColor: 0xffffff,
+            points: 10.00,
+            maxDistance: 20.00,
+            spacing: 20.00
+        });
+    </script>
+</body>
+</html>
